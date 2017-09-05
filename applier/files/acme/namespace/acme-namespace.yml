@@ -1,0 +1,49 @@
+kind: List
+apiVersion: v1
+metadata: {}
+items:
+- apiVersion: v1
+  kind: Namespace
+  metadata:
+    annotations:
+      openshift.io/display-name: "OpenShift Acme"
+    name: acme
+  spec:
+    finalizers:
+    - openshift.io/origin
+    - kubernetes
+- apiVersion: v1
+  kind: RoleBinding
+  metadata:
+    name: system:deployer
+  roleRef:
+    name: system:deployer
+  subjects:
+  - kind: ServiceAccount
+    name: deployer
+    namespace: acme
+  userNames:
+  - system:serviceaccount:acme:deployer
+- apiVersion: v1
+  kind: RoleBinding
+  metadata:
+    name: system:image-builder
+  roleRef:
+    name: system:image-builder
+  subjects:
+  - kind: ServiceAccount
+    name: builder
+    namespace: acme
+  userNames:
+  - system:serviceaccount:acme:builder
+- apiVersion: v1
+  groupNames:
+  - system:serviceaccounts:acme
+  kind: RoleBinding
+  metadata:
+    name: system:image-puller
+  roleRef:
+    name: system:image-puller
+  subjects:
+  - kind: SystemGroup
+    name: system:serviceaccounts:acme

@@ -1,0 +1,23 @@
+---
+
+openshift_cluster_content:
+  - object: projectrequest
+    content:
+      - name: "acme-project"
+        file: "{{ inventory_dir }}/../files/acme/ProjectRequest/acme-project.yml"
+  - object: namespace
+    content:
+      - name: acme-namespace
+        file: "{{ inventory_dir }}/../files/acme/namespace/acme-namespace.yml"
+  - object: policy
+    content:
+      - file: "{{ inventory_dir }}/../files/policy/clusterrole.yml"
+      - file: "{{ inventory_dir }}/../files/policy/clusterrolebinding.yml"
+  - object: deployments
+    content:
+      - name: acme-serviceaccount
+        file: "{{ inventory_dir }}/../files/acme/deployments/acme-serviceaccount.yml"
+      - name: acme-deployment
+        file: "{{ inventory_dir }}/../files/acme/deployments/deployment-letsencrypt-live.yml"
+      - name: acme-service
+        file: "{{ inventory_dir }}/../files/acme/deployments/service.yml"
