@@ -1,10 +1,6 @@
 ---
 
 openshift_cluster_content:
-  - object: projectrequest
-    content:
-      - name: "acme-project"
-        file: "{{ inventory_dir }}/../files/acme/ProjectRequest/acme-project.yml"
   - object: namespace
     content:
       - name: acme-namespace
